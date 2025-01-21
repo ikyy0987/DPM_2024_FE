@@ -41,7 +41,7 @@ export default function LoginScreen() {
     return (
         <PaperProvider>
             <ThemedView style={styles.container}>
-                <Image source={require("../../assets/images/icon.png")} style={styles.logo} />
+                <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
                 <Text style={styles.title}>Welcome Back!</Text>
                 <Text style={styles.subtitle}>Log in to continue</Text>
                 <TextInput
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
         height: 150,
         marginBottom: 24,
         resizeMode: "contain",
+        borderRadius: 75,
     },
     title: {
         fontSize: 24,

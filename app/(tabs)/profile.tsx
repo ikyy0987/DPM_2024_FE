@@ -50,7 +50,7 @@ const ProfileScreen = () => {
         return (
             <PaperProvider>
                 <ThemedView style={styles.container}>
-                    <ActivityIndicator animating={true}/>
+                    <ActivityIndicator animating={true} size="large" color="#6200ee" />
                 </ThemedView>
             </PaperProvider>
         );
@@ -60,28 +60,28 @@ const ProfileScreen = () => {
         <PaperProvider>
             <ThemedView style={styles.container}>
                 {profile ? (
-                    <ThemedView>
+                    <ThemedView style={styles.card}>
                         <ThemedText style={styles.title}>Profile</ThemedText>
                         <ThemedText style={styles.label}>Username:</ThemedText>
                         <ThemedText style={styles.value}>{profile.username}</ThemedText>
                         <ThemedText style={styles.label}>Email:</ThemedText>
                         <ThemedText style={styles.value}>{profile.email}</ThemedText>
-                        <Button mode="contained" onPress={handleLogout} style={styles.logoutButton}>
+                        <Button mode="contained" onPress={handleLogout} style={styles.logoutButton} labelStyle={styles.logoutButtonText}>
                             Log Out
                         </Button>
                     </ThemedView>
                 ) : (
-                    <ThemedText>No profile data available</ThemedText>
+                    <ThemedText style={styles.noData}>No profile data available</ThemedText>
                 )}
                 <Portal>
-                    <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
-                        <Dialog.Title>Logout</Dialog.Title>
+                    <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)} style={styles.dialog}>
+                        <Dialog.Title style={styles.dialogTitle}>Logout</Dialog.Title>
                         <Dialog.Content>
-                            <Text>Are you sure you want to logout?</Text>
+                            <Text style={styles.dialogContent}>Are you sure you want to logout?</Text>
                         </Dialog.Content>
                         <Dialog.Actions>
-                            <Button onPress={() => setDialogVisible(false)}>Cancel</Button>
-                            <Button onPress={confirmLogout}>OK</Button>
+                            <Button onPress={() => setDialogVisible(false)} labelStyle={styles.cancelButton}>Cancel</Button>
+                            <Button onPress={confirmLogout} mode="contained" labelStyle={styles.confirmButton}>OK</Button>
                         </Dialog.Actions>
                     </Dialog>
                 </Portal>
@@ -96,25 +96,75 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
+        backgroundColor: '#f4f4f8',
+    },
+    card: {
+        backgroundColor: '#ffffff',
+        borderRadius: 12,
+        padding: 20,
+        width: '90%',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        borderWidth: 1,
+        borderColor: '#ddd',
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
-        marginBottom: 24,
-        color: '#333',
+        marginBottom: 20,
+        textAlign: 'center',
+        color: '#6200ee',
     },
     label: {
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: '600',
         marginTop: 16,
         color: '#333',
     },
     value: {
         fontSize: 18,
-        color: '#666',
+        color: '#555',
+        marginBottom: 8,
+    },
+    noData: {
+        fontSize: 18,
+        color: '#999',
+        textAlign: 'center',
     },
     logoutButton: {
         marginTop: 24,
+        backgroundColor: '#6200ee',
+        paddingVertical: 8,
+    },
+    logoutButtonText: {
+        fontSize: 16,
+        color: '#ffffff',
+    },
+    dialog: {
+        borderRadius: 10,
+        padding: 10,
+    },
+    dialogTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#333',
+        textAlign: 'center',
+    },
+    dialogContent: {
+        fontSize: 16,
+        color: '#555',
+        textAlign: 'center',
+    },
+    cancelButton: {
+        color: '#999',
+        fontSize: 16,
+    },
+    confirmButton: {
+        color: '#ffffff',
+        fontSize: 16,
     },
 });
 
